@@ -86,9 +86,9 @@ void AdminPunishmentNotify(HTTPResponse response, any value) {
 
   char name[512];
   GetClientName(client, name, sizeof(name));
-  for (int i = 0; i <= MaxClients; i++) {
-    if (GetUserFlagBits(i) & ADMFLAG_GENERIC) {
-      CPrintToChat(i, "{red}%s{default} just connected.");
+  for (int i = 1; i <= MaxClients; i++) {
+    if (IsClientInGame(i) && !IsFakeClient(i) && GetUserFlagBits(i) & ADMFLAG_GENERIC) {
+      CPrintToChat(i, "{red}%s{default} just connected.", name);
       if (ban != 0) CPrintToChat(i, "This user was previously banned {blue}%i{default} times.", ban);
       if (mute != 0) CPrintToChat(i, "This user was previously muted {blue}%i{default} times.", mute);
       if (gag != 0) CPrintToChat(i, "This user was previously gagged {blue}%i{default} times.", gag);
